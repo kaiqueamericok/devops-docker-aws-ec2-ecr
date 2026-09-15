@@ -55,16 +55,16 @@ Docker run: Utilizado para criar um novo container a partir de uma imagem
 
 ### 2. Docker push no AMAZON ECR
 Acessar o ECR pelo painel do amazon e criar o repositório 
-aws ecr create-repository --repository-name website-devops
+aws ecr create-repository --repository-name meu-site:v1.0
 
 Fazer login no ECR o codigo abaixo solicita uma senha e envia para o docker login.
-aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-2.amazonaws.com/calc_cloud:v1.0
 
 Cria um "novo nome" para a mesma iamgem e associa a tag para o endereço do repositório ECR 
 docker tag meu-site:v1.0 <account-id>.dkr.ecr.us-east-2.amazonaws.com/calc_cloud:v1.0
 
 Envia a imagem para o ECR
-docker push <account-id>.dkr.ecr.us-east-1.amazonaws.com/website-devops:latest
+docker push <account-id>..dkr.ecr.us-east-2.amazonaws.com/calc_cloud:v1.0
 
 ### 3. Provisionamento da EC2 
 
