@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+
+# Documentação
+README.md
+docs/
+*.md
+
+# AWS - NUNCA
+*.pem
+*.ppk
+.aws/
+.env
+
+# IDEs
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+venv/
+.venv/
+
+# Node
+node_modules/
