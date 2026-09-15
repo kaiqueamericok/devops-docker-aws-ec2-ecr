@@ -60,7 +60,8 @@ aws ecr create-repository --repository-name meu-site:v1.0
 Fazer login no ECR o codigo abaixo solicita uma senha e envia para o docker login.
 aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-2.amazonaws.com/calc_cloud:v1.0
 
-Cria um "novo nome" para a mesma iamgem e associa a tag para o endereço do repositório ECR 
+Cria um "novo nome" para a mesma imagem e associa a tag para o endereço do repositório ECR 
+
 docker tag meu-site:v1.0 <account-id>.dkr.ecr.us-east-2.amazonaws.com/calc_cloud:v1.0
 
 Envia a imagem para o ECR
@@ -79,9 +80,10 @@ Nessa etapa vamos utilizar o EC2 (Elastic Compute Cloud). É o serviço da AWS q
 ssh -i minha-chave.pem ec2-user@<ip-publico>
 sudo yum install -y docker
 sudo systemctl start docker
-aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-1.amazonaws.com
-sudo docker pull <account-id>.dkr.ecr.us-east-1.amazonaws.com/website-devops:latest
-sudo docker run -d -p 80:80 <account-id>.dkr.ecr.us-east-1.amazonaws.com/website-devops:latest
+aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-2.amazonaws.com/calc_cloud:v1.0
+
+sudo docker pull <account-id>.dkr.ecr.us-east-2.amazonaws.com/calc_cloud:v1.0
+sudo docker run -d -p 80:80 <account-id>.dkr.ecr.us-east-2.amazonaws.com/calc_cloud:v1.0t
 
 ✅Resultado
 Aplicação acessível publicamente via IP da EC2.
