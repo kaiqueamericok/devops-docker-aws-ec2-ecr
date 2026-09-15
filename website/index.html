@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Cost Calculator — estimativa de custo Azure</title>
+  <meta name="description" content="Estime o custo mensal de infraestrutura Azure a partir de VM, storage e quantidade." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="console">
+
+    <header class="console__header">
+      <div class="header__label">custo-estimado / azure</div>
+      <h1 class="header__title">Cloud Cost Calculator</h1>
+      <p class="header__subtitle">Monte uma configuração de VMs no Azure e veja a estimativa de custo mensal, em tempo real.</p>
+    </header>
+
+    <main class="panels">
+
+      <!-- PAINEL DE ENTRADA -->
+      <section class="panel panel--input" aria-label="Configuração">
+        <div class="panel__title">Configuração</div>
+
+        <div class="field">
+          <label for="cloud">Provedor</label>
+          <select id="cloud" disabled>
+            <option value="azure" selected>Microsoft Azure</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="vm">Tipo de VM</label>
+          <select id="vm"></select>
+        </div>
+
+        <div class="field field--grid">
+          <div class="readout">
+            <span class="readout__label">vCPU</span>
+            <span class="readout__value" id="vm-cpu">—</span>
+          </div>
+          <div class="readout">
+            <span class="readout__label">RAM</span>
+            <span class="readout__value" id="vm-ram">—</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="storage">Storage por instância (GB)</label>
+          <input type="number" id="storage" min="0" step="1" value="128" />
+        </div>
+
+        <div class="field">
+          <label for="disk-tier">Tipo de disco</label>
+          <select id="disk-tier"></select>
+        </div>
+
+        <div class="field">
+          <label for="qty">Quantidade de instâncias</label>
+          <input type="number" id="qty" min="1" step="1" value="3" />
+        </div>
+
+        <hr class="divider" />
+
+        <div class="field">
+          <label for="fx">Cotação USD → BRL</label>
+          <input type="number" id="fx" min="0" step="0.01" value="5.30" />
+        </div>
+
+        <p class="disclaimer">
+          Valores de referência (sob demanda, lista global), apenas para fins de estimativa e portfólio —
+          não refletem preço em tempo real nem a região escolhida. Ajuste a cotação e os preços em
+          <code>script.js</code> conforme necessário.
+        </p>
+      </section>
+
+      <!-- PAINEL DE RESULTADO -->
+      <section class="panel panel--output" aria-label="Estimativa">
+        <div class="panel__title">Estimativa mensal</div>
+
+        <div class="total">
+          <span class="total__currency">R$</span>
+          <span class="total__value" id="total-brl">0,00</span>
+          <span class="total__usd" id="total-usd">(US$ 0,00)</span>
+        </div>
+
+        <table class="breakdown">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Unitário / mês</th>
+              <th>Qtd</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Computação (VM)</td>
+              <td id="vm-unit">—</td>
+              <td id="vm-qty">—</td>
+              <td id="vm-subtotal">—</td>
+            </tr>
+            <tr>
+              <td>Storage</td>
+              <td id="storage-unit">—</td>
+              <td id="storage-qty">—</td>
+              <td id="storage-subtotal">—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="scenario">
+          <button class="scenario__save" id="save-scenario">Salvar cenário</button>
+          <div class="scenario__list" id="scenario-list"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="console__footer">
+      Projeto de portfólio — desenvolvido por Kaique Americo ·
+      <a href="https://github.com/kaiqueamericok" target="_blank" rel="noopener">github.com/kaiqueamericok</a>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
