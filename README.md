@@ -47,7 +47,7 @@ Docker Image
 
 ```bash
 docker build -t meu-site:v1.0 .
-docker run -d -p 8080:80 website-devops
+docker run -d -p 8080:80 meu-site:v1.0 
 ```
 
 Docker build: Utilizado para criar a imagem a partir do Dockerfile com o "-t" definimos uma tag. 
